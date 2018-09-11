@@ -1,5 +1,35 @@
 <TS language="fr_FR" version="2.1">
 <context>
+    <name>MainMenuPanel</name>
+    <message>
+        <source>Overview</source>
+        <translation>Aperçu</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Envoyer</translation>
+    </message>
+    <message>
+        <source>Receive</source>
+        <translation>Recevoir</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>Transactions</translation>
+    </message>
+</context>
+<context>
+    <name>PriceWidget</name>
+    <message>
+        <source>Price</source>
+        <translation>Prix</translation>
+    </message>
+    <message>
+        <source>Volume (24)</source>
+        <translation>Le volume (24)</translation>
+    </message>
+</context>
+<context>
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
@@ -43,11 +73,11 @@
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation>Choisissez une adresse où envoyer les bitcoins</translation>
+        <translation>Choisissez une adresse où envoyer les BCA</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>Choisissez une adresse où recevoir les bitcoins</translation>
+        <translation>Choisissez une adresse où recevoir les BCA</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -128,8 +158,8 @@
         <translation>Décrypter le porte-monnaie</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Attention : Si vous chiffrez votre portefeuille et que vous perdez votre mot de passe vous &lt;b&gt; PERDREZ TOUS VOS BITCOINS&lt;/b&gt; !</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BCA&lt;/b&gt;!</source>
+        <translation>Attention : Si vous chiffrez votre portefeuille et que vous perdez votre mot de passe vous &lt;b&gt; PERDREZ TOUS VOS BCA&lt;/b&gt; !</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -238,8 +268,8 @@
         <translation>Réindexer les blocs sur le disque...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Envoyer des pièces à une adresse Bitcoin</translation>
+        <source>Send coins to a Bitcoin Atom address</source>
+        <translation>Envoyer des pièces à une adresse Bitcoin Atom</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -262,8 +292,8 @@
         <translation>&amp;Vérification du message</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Bitcoin Atom</source>
+        <translation>Bitcoin Atom</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -290,8 +320,8 @@
         <translation>Crypter les clé privées qui appartiennent votre portefeuille</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Signer vos messages avec vos adresses Bitcoin pour prouver que vous les détenez</translation>
+        <source>Sign messages with your Bitcoin Atom addresses to prove you own them</source>
+        <translation>Signer vos messages avec vos adresses Bitcoin Atom pour prouver que vous les détenez</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -310,24 +340,24 @@
         <translation>Barre d'outils des onglets</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Demander des paiements (générer QR codes et bitcoin: URIs)</translation>
+        <source>Request payments (generates QR codes and Bitcoin Atom: URIs)</source>
+        <translation>Demander des paiements (générer QR codes et Bitcoin Atom: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
         <translation>Montrer la liste des adresses d'envois utilisées et les étiquettes</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>Ouvrir un bitcoin: URI ou demande de paiement</translation>
+        <source>Open a Bitcoin Atom: URI or payment request</source>
+        <translation>Ouvrir un Bitcoin Atom: URI ou demande de paiement</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Options de ligne de commande</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n connexion active au réseau Bitcoin</numerusform><numerusform>%n connexions actives au réseau Bitcoin</numerusform></translation>
+        <source>%n active connection(s) to Bitcoin Atom network</source>
+        <translation><numerusform>%n connexion active au réseau Bitcoin Atom</numerusform><numerusform>%n connexions actives au réseau Bitcoin Atom</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -712,8 +742,8 @@
         <translation>Expert</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Ouvrir le port du client Bitcoin automatiquement sur le routeur. Cela ne fonctionne que si votre routeur supporte l'UPnP et si la fonctionnalité est activée.</translation>
+        <source>Automatically open the Bitcoin Atom client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Ouvrir le port du client Bitcoin Atom automatiquement sur le routeur. Cela ne fonctionne que si votre routeur supporte l'UPnP et si la fonctionnalité est activée.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -811,6 +841,38 @@
 <context>
     <name>OverviewPage</name>
     <message>
+        <source>Balances:</source>
+        <translation>Équilibre:</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>Envoyer</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>Transactions</translation>
+    </message>
+    <message>
+        <source>Sync progress:</source>
+        <translation>Synchronisation:</translation>
+    </message>
+    <message>
+        <source>Recent transactions:</source>
+        <translation>Transactions récentes:</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>La date</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Étiquette</translation>
+    </message>
+    <message>
+        <source>Amount</source>
+        <translation>Montant</translation>
+    </message>
+    <message>
         <source>Form</source>
         <translation>Formulaire</translation>
     </message>
@@ -872,8 +934,8 @@
         <translation>Montant</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Entrer une adresse Bitcoin (e.g. %1)</translation>
+        <source>Enter a Bitcoin Atom address (e.g. %1)</source>
+        <translation>Entrer une adresse Bitcoin Atom (e.g. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1144,6 +1206,50 @@
 <context>
     <name>ReceiveCoinsDialog</name>
     <message>
+        <source>Receive:</source>
+        <translation>Recevoir:</translation>
+    </message>
+    <message>
+        <source>All fields are optional:</source>
+        <translation>Tous les champs sont optionnels:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>Étiquette:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Montant:</translation>
+    </message>
+    <message>
+        <source>Message:</source>
+        <translation>Message:</translation>
+    </message>
+    <message>
+        <source>REQUEST</source>
+        <translation>Demande</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>Tout effacer</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>La date</translation>
+    </message>
+    <message>
+        <source>Label</source>
+        <translation>Étiquette</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Message</translation>
+    </message>
+    <message>
+        <source>Requested amount</source>
+        <translation>Quantité exigée</translation>
+    </message>
+    <message>
         <source>&amp;Amount:</source>
         <translation>Montant :</translation>
     </message>
@@ -1164,7 +1270,7 @@
         <translation>Nettoyer</translation>
     </message>
     <message>
-        <source>Requested payments history</source>
+        <source>Request payments history:</source>
         <translation>Historique des demandes de paiements.</translation>
     </message>
     <message>
@@ -1245,9 +1351,87 @@
         <source>(no label)</source>
         <translation>(aucune étiquette)</translation>
     </message>
-    </context>
+</context>
+<context>
+    <name>LastSendTransactionView</name>
+    <message>
+        <source>To:</source>
+        <translation>À:</translation>
+    </message>
+    <message>
+        <source>When:</source>
+        <translation>Quand:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Montant:</translation>
+    </message>
+</context>
+<context>
+    <name>SendCoinsEntry</name>
+    <message>
+        <source>Fill the form:</source>
+        <translation>Remplir le formulaire:</translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation>À:</translation>
+    </message>
+    <message>
+        <source>Label:</source>
+        <translation>Étiquette:</translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation>Montant:</translation>
+    </message>
+    <message>
+        <source>CLEAR ALL</source>
+        <translation>Tout effacer</translation>
+    </message>
+    <message>
+        <source>Subtract fee from amount</source>
+        <translation>Soustraire les frais du montant</translation>
+    </message>
+</context>
 <context>
     <name>SendCoinsDialog</name>
+    <message>
+        <source>Send:</source>
+        <translation>Envoyer:</translation>
+    </message>
+    <message>
+        <source>Including transaction fee:</source>
+        <translation>Y compris les frais de transaction:</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation>Changement</translation>
+    </message>
+    <message>
+        <source>Are you sure ?</source>
+        <translation>Êtes-vous sûr ?</translation>
+    </message>
+    <message>
+        <source>SEND</source>
+        <translation>Envoyer</translation>
+    </message>
+    <message>
+        <source>Last:</source>
+        <translation>Dernier:</translation>
+    </message>
+    <message>
+        <source>Pending</source>
+        <translation>En attente</translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation>Terminé</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Erreur</translation>
+    </message>
     <message>
         <source>Send Coins</source>
         <translation>Envoyer des pièces</translation>
@@ -1615,9 +1799,60 @@
         <source>(no label)</source>
         <translation>(aucune étiquette)</translation>
     </message>
-    </context>
+</context>
+<context>
+    <name>ChangeFeeDialog</name>
+    <message>
+        <source>Transaction fee:</source>
+        <translation>Frais de transaction:</translation>
+    </message>
+    <message>
+        <source>Recommended:</source>
+        <translation>Сonseillé:</translation>
+    </message>
+    <message>
+        <source>Confirmation time target:</source>
+        <translation>Cible de confirmation:</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>Ordinaire</translation>
+    </message>
+    <message>
+        <source>Fast</source>
+        <translation>Vite</translation>
+    </message>
+    <message>
+        <source>Custom:</source>
+        <translation>Douane:</translation>
+    </message>
+    <message>
+        <source>Per Kbyte</source>
+        <translation>Par Kbyte</translation>
+    </message>
+    <message>
+        <source>Pay only the required fee of 0.00001000 BCA/kB</source>
+        <translation>Ne payez que les frais de 0.00001000 BCA/kB</translation>
+    </message>
+    <message>
+        <source>[ Smart fee not initialized yet. This usualy takes a few blocks ... ]</source>
+        <translation>Smart fee pas encore initialisé. Ceci habituellement prend quelques blocs</translation>
+    </message>
+</context>
 <context>
     <name>TransactionView</name>
+    <message>
+        <source>Transactions:</source>
+        <translation>Transactions:</translation>
+    </message>
+    <message>
+        <source>Choose</source>
+        <translation>Choisir</translation>
+    </message>
+    <message>
+        <source>Enter address, transaction id, or label to search</source>
+        <translation>Entrer l'adresse, identifiant de transaction, ou étiquette pour rechercher</translation>
+    </message>
     <message>
         <source>All</source>
         <translation>Toutes</translation>
@@ -1734,8 +1969,8 @@
         <translation>Impossible de démarrer le serveur HTTP. Voir le journal de débogage pour plus de détails.</translation>
     </message>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Bitcoin Core</translation>
+        <source>Bitcoin Atom Core</source>
+        <translation>Bitcoin Atom Core</translation>
     </message>
     <message>
         <source>&lt;category&gt; can be:</source>

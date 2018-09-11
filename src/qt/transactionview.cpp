@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2016 The Bitcoin Core developers
+// Copyright (c) 2011-2017 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -8,7 +8,6 @@
 #include <qt/bitcoinunits.h>
 #include <qt/csvmodelwriter.h>
 #include <qt/editaddressdialog.h>
-#include <qt/guiutil.h>
 #include <qt/optionsmodel.h>
 #include <qt/platformstyle.h>
 #include <qt/sendcoinsdialog.h>
@@ -17,6 +16,8 @@
 #include <qt/transactionrecord.h>
 #include <qt/transactiontablemodel.h>
 #include <qt/walletmodel.h>
+#include <qt/stockinfo.h>
+#include <qt/pricewidget.h>
 
 #include <ui_interface.h>
 
@@ -36,31 +37,37 @@
 #include <QTimer>
 #include <QUrl>
 #include <QVBoxLayout>
+#include <QSpacerItem>
 
 TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *parent) :
     QWidget(parent), model(0), transactionProxyModel(0),
     transactionView(0), abandonAction(0), bumpFeeAction(0), columnResizingFixer(0)
 {
-    // Build filter row
-    setContentsMargins(0,0,0,0);
+    // Build filter row  54,40,62,40
+    setContentsMargins(54,40,62,40);
 
     QHBoxLayout *hlayout = new QHBoxLayout();
     hlayout->setContentsMargins(0,0,0,0);
 
     if (platformStyle->getUseExtraSpacing()) {
-        hlayout->setSpacing(5);
-        hlayout->addSpacing(26);
+        hlayout->setSpacing(35);
+        //hlayout->addSpacing(26);
     } else {
-        hlayout->setSpacing(0);
-        hlayout->addSpacing(23);
+        hlayout->setSpacing(25);
+        //hlayout->addSpacing(23);
     }
 
-    watchOnlyWidget = new QComboBox(this);
-    watchOnlyWidget->setFixedWidth(24);
-    watchOnlyWidget->addItem("", TransactionFilterProxy::WatchOnlyFilter_All);
-    watchOnlyWidget->addItem(platformStyle->SingleColorIcon(":/icons/eye_plus"), "", TransactionFilterProxy::WatchOnlyFilter_Yes);
-    watchOnlyWidget->addItem(platformStyle->SingleColorIcon(":/icons/eye_minus"), "", TransactionFilterProxy::WatchOnlyFilter_No);
-    hlayout->addWidget(watchOnlyWidget);
+    //watchOnlyWidget = new QComboBox(this);
+    //watchOnlyWidget->setFixedWidth(24);
+    //watchOnlyWidget->addItem("", TransactionFilterProxy::WatchOnlyFilter_All);
+    //watchOnlyWidget->addItem(platformStyle->SingleColorIcon(":/icons/eye_plus"), "", TransactionFilterProxy::WatchOnlyFilter_Yes);
+    //watchOnlyWidget->addItem(platformStyle->SingleColorIcon(":/icons/eye_minus"), "", TransactionFilterProxy::WatchOnlyFilter_No);
+    //hlayout->addWidget(watchOnlyWidget);
+
+    QLabel* labelChoose = new QLabel(this);
+    labelChoose->setText(tr("Choose"));
+    labelChoose->setStyleSheet("color: #b2b2c0; font-family: \"Roboto Mono\"; font-size: 12px; font-weight: 500;");
+    hlayout->addWidget(labelChoose);
 
     dateWidget = new QComboBox(this);
     if (platformStyle->getUseExtraSpacing()) {
@@ -68,6 +75,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     } else {
         dateWidget->setFixedWidth(120);
     }
+    dateWidget->setStyleSheet("font-family: \"Roboto Mono\";");
     dateWidget->addItem(tr("All"), All);
     dateWidget->addItem(tr("Today"), Today);
     dateWidget->addItem(tr("This week"), ThisWeek);
@@ -75,6 +83,23 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     dateWidget->addItem(tr("Last month"), LastMonth);
     dateWidget->addItem(tr("This year"), ThisYear);
     dateWidget->addItem(tr("Range..."), Range);
+    dateWidget->setStyleSheet("QComboBox::down-arrow { \
+                              image: url(:/icons/combo_arrow); \
+                              margin: 2px \
+                          } \
+                          QComboBox::drop-down { \
+                              background-color: transparent; \
+                              border: none; \
+                              padding: 2px; \
+                          } \
+                          QComboBox { \
+                              background-color: rgba(170, 170, 186, 33); \
+                              border-top: 2px inset rgba(0, 0, 0, 33); \
+                              border-left: 2px inset rgba(0, 0, 0, 33); \
+                              border-bottom: 2px solid rgba(170, 170, 186, 33); \
+                              border-right: 2px solid rgba(170, 170, 186, 33); \
+                              border-radius: 4px; \
+                          }");
     hlayout->addWidget(dateWidget);
 
     typeWidget = new QComboBox(this);
@@ -83,6 +108,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     } else {
         typeWidget->setFixedWidth(120);
     }
+    typeWidget->setStyleSheet("font-family: \"Roboto Mono\";");
 
     typeWidget->addItem(tr("All"), TransactionFilterProxy::ALL_TYPES);
     typeWidget->addItem(tr("Received with"), TransactionFilterProxy::TYPE(TransactionRecord::RecvWithAddress) |
@@ -93,15 +119,35 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     typeWidget->addItem(tr("Mined"), TransactionFilterProxy::TYPE(TransactionRecord::Generated));
     typeWidget->addItem(tr("Other"), TransactionFilterProxy::TYPE(TransactionRecord::Other));
 
+    typeWidget->setStyleSheet("QComboBox::down-arrow { \
+                              image: url(:/icons/combo_arrow); \
+                              margin: 2px \
+                          } \
+                          QComboBox::drop-down { \
+                              background-color: transparent; \
+                              border: none; \
+                              padding: 2px; \
+                          } \
+                          QComboBox { \
+                              background-color: rgba(170, 170, 186, 33); \
+                              border-top: 2px inset rgba(0, 0, 0, 33); \
+                              border-left: 2px inset rgba(0, 0, 0, 33); \
+                              border-bottom: 2px solid rgba(170, 170, 186, 33); \
+                              border-right: 2px solid rgba(170, 170, 186, 33); \
+                              border-radius: 4px; \
+                          }");
+
     hlayout->addWidget(typeWidget);
 
     search_widget = new QLineEdit(this);
+    search_widget->setStyleSheet("background-color: rgba(170, 170, 186, 33); border-top: 2px inset rgba(0, 0, 0, 33); border-left: 2px inset rgba(0, 0, 0, 33); border-bottom: 2px solid rgba(170, 170, 186, 33); border-right: 2px solid rgba(170, 170, 186, 33); border-radius: 4px; font-family: \"Roboto Mono\";");
 #if QT_VERSION >= 0x040700
     search_widget->setPlaceholderText(tr("Enter address, transaction id, or label to search"));
 #endif
     hlayout->addWidget(search_widget);
 
     amountWidget = new QLineEdit(this);
+    amountWidget->setStyleSheet("background-color: rgba(170, 170, 186, 33); border-top: 2px inset rgba(0, 0, 0, 33); border-left: 2px inset rgba(0, 0, 0, 33); border-bottom: 2px solid rgba(170, 170, 186, 33); border-right: 2px solid rgba(170, 170, 186, 33); border-radius: 4px; font-family: \"Roboto Mono\";");
 #if QT_VERSION >= 0x040700
     amountWidget->setPlaceholderText(tr("Min amount"));
 #endif
@@ -126,19 +172,33 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
 
     QVBoxLayout *vlayout = new QVBoxLayout(this);
     vlayout->setContentsMargins(0,0,0,0);
-    vlayout->setSpacing(0);
+
+    headLayout = new QHBoxLayout(this);
+    headLayout->setContentsMargins(0,0,0,0);
+    headLayout->setSpacing(0);
+
+    QLabel* labelTrans = new QLabel(this);
+    labelTrans->setText(tr("Transactions:"));
+    labelTrans->setStyleSheet("font-family: \"Roboto Mono\"; font-size: 24px; font-weight: 500;");
+    labelTrans->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    labelTrans->setMinimumSize(267, 31);
+    labelTrans->setMaximumSize(267, 31);
+
+    headLayout->addWidget(labelTrans);
+    vlayout->addLayout(headLayout);
 
     QTableView *view = new QTableView(this);
+    view->setStyleSheet("font-family: \"Roboto Mono\";");
     vlayout->addLayout(hlayout);
     vlayout->addWidget(createDateRangeWidget());
     vlayout->addWidget(view);
-    vlayout->setSpacing(0);
-    int width = view->verticalScrollBar()->sizeHint().width();
+    vlayout->setSpacing(45);
+    //int width = view->verticalScrollBar()->sizeHint().width();
     // Cover scroll bar width with spacing
     if (platformStyle->getUseExtraSpacing()) {
-        hlayout->addSpacing(width+2);
+        //hlayout->addSpacing(width+2);
     } else {
-        hlayout->addSpacing(width);
+        //hlayout->addSpacing(width);
     }
     // Always show scroll bar
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -184,7 +244,7 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
 
     connect(dateWidget, SIGNAL(activated(int)), this, SLOT(chooseDate(int)));
     connect(typeWidget, SIGNAL(activated(int)), this, SLOT(chooseType(int)));
-    connect(watchOnlyWidget, SIGNAL(activated(int)), this, SLOT(chooseWatchonly(int)));
+    //connect(watchOnlyWidget, SIGNAL(activated(int)), this, SLOT(chooseWatchonly(int)));
     connect(amountWidget, SIGNAL(textChanged(QString)), amount_typing_delay, SLOT(start()));
     connect(amount_typing_delay, SIGNAL(timeout()), this, SLOT(changedAmount()));
     connect(search_widget, SIGNAL(textChanged(QString)), prefix_typing_delay, SLOT(start()));
@@ -203,6 +263,14 @@ TransactionView::TransactionView(const PlatformStyle *platformStyle, QWidget *pa
     connect(copyTxPlainText, SIGNAL(triggered()), this, SLOT(copyTxPlainText()));
     connect(editLabelAction, SIGNAL(triggered()), this, SLOT(editLabel()));
     connect(showDetailsAction, SIGNAL(triggered()), this, SLOT(showDetails()));
+}
+
+void TransactionView::addPriceWidget(StockInfo* stockInfo)
+{
+    PriceWidget *priceWidget = new PriceWidget(stockInfo, this);
+    headLayout->addWidget(priceWidget);
+    QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Fixed);
+    headLayout->addItem(spacer);
 }
 
 void TransactionView::setModel(WalletModel *_model)
@@ -322,8 +390,8 @@ void TransactionView::chooseWatchonly(int idx)
 {
     if(!transactionProxyModel)
         return;
-    transactionProxyModel->setWatchOnlyFilter(
-        (TransactionFilterProxy::WatchOnlyFilter)watchOnlyWidget->itemData(idx).toInt());
+    //transactionProxyModel->setWatchOnlyFilter(
+     //   (TransactionFilterProxy::WatchOnlyFilter)watchOnlyWidget->itemData(idx).toInt());
 }
 
 void TransactionView::changedSearch()
@@ -366,7 +434,7 @@ void TransactionView::exportClicked()
     // name, column, role
     writer.setModel(transactionProxyModel);
     writer.addColumn(tr("Confirmed"), 0, TransactionTableModel::ConfirmedRole);
-    if (model && model->haveWatchOnly())
+    if (model->haveWatchOnly())
         writer.addColumn(tr("Watch-only"), TransactionTableModel::Watchonly);
     writer.addColumn(tr("Date"), 0, TransactionTableModel::DateRole);
     writer.addColumn(tr("Type"), TransactionTableModel::Type, Qt::EditRole);
@@ -598,7 +666,7 @@ void TransactionView::focusTransaction(const QModelIndex &idx)
 void TransactionView::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
-    columnResizingFixer->stretchColumnWidth(TransactionTableModel::ToAddress);
+    columnResizingFixer->stretchColumnWidth(TransactionTableModel::ToAddress, 0);
 }
 
 // Need to override default Ctrl+C action for amount as default behaviour is just to copy DisplayRole text
@@ -619,6 +687,6 @@ bool TransactionView::eventFilter(QObject *obj, QEvent *event)
 // show/hide column Watch-only
 void TransactionView::updateWatchOnlyColumn(bool fHaveWatchOnly)
 {
-    watchOnlyWidget->setVisible(fHaveWatchOnly);
-    transactionView->setColumnHidden(TransactionTableModel::Watchonly, !fHaveWatchOnly);
+    //watchOnlyWidget->setVisible(fHaveWatchOnly);
+    //transactionView->setColumnHidden(TransactionTableModel::Watchonly, !fHaveWatchOnly);
 }

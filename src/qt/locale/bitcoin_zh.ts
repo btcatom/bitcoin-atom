@@ -1,5 +1,35 @@
 <TS language="zh" version="2.1">
 <context>
+    <name>MainMenuPanel</name>
+    <message>
+        <source>Overview</source>
+        <translation>概观</translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation>发送</translation>
+    </message>
+    <message>
+        <source>Receive</source>
+        <translation>接收</translation>
+    </message>
+    <message>
+        <source>Transactions</source>
+        <translation>交易</translation>
+    </message>
+</context>
+<context>
+    <name>PriceWidget</name>
+    <message>
+        <source>Price</source>
+        <translation>가격</translation>
+    </message>
+    <message>
+        <source>Volume (24)</source>
+        <translation>音量 (24)</translation>
+    </message>
+</context>
+<context>
     <name>AddressBookPage</name>
     </context>
 <context>
@@ -12,7 +42,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>Bitcoin Atom GUI</name>
     <message>
         <source>Error</source>
         <translation>错误</translation>
@@ -107,7 +137,7 @@
         <translation>仅支付全额的%1</translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
+        <source>Warning: Invalid Bitcoin Atom address</source>
         <translation>警告：比特币地址无效</translation>
     </message>
     </context>
@@ -166,7 +196,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>Bitcoin Atom-core</name>
     <message>
         <source>Transaction too large for fee policy</source>
         <translation>根据费率标准，本次转账超额</translation>
